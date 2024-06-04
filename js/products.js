@@ -1,40 +1,73 @@
-let mostrador = document.getElementById("mostrador");
-let seleccion = document.getElementById("seleccion");
-let imgSeleccionada = document.getElementById("img");
-let modeloSeleccionado = document.getElementById("modelo");
-let descripSeleccionada = document.getElementById("descripcion");
-let precioSeleccionado = document.getElementById("precio");
 
-function cargar(item){
-    quitarBordes();
-      // Get description text from the element with the corresponding class
-    const containerWidth = document.documentElement.clientWidth;
-    const seleccionWidth = containerWidth * 0.4; // Set width of seleccion to 40% of container
-    mostrador.style.width = `${containerWidth - seleccionWidth}px`;
-    seleccion.style.width = `${seleccionWidth}px`;
-    seleccion.style.opacity = "1";
-    item.style.border = "2px solid red";
-  
-    imgSeleccionada.src = item.getElementsByTagName("img")[0].src;
-  
-    modeloSeleccionado.innerHTML =  item.getElementsByTagName("p")[0].innerHTML;
-  
-    //descripSeleccionada.innerHTML = "Descripción del modelo ";
-  
-    precioSeleccionado.innerHTML =  item.getElementsByTagName("span")[0].innerHTML;
-    
-  
-  
+const carrito = document.getElementById("carrito");
+const elementos1 = document.getElementById("lista-1");
+const lista= document.querySelector("#lista-carrito tbody");
+const vaciarCarritoBtn = document.getElementById("vaciar-carrito");
+
+cargarEventListeners();
+
+function cargarEventListeners(){
+  elementos1.addEventListener("click", comprarElemento);
+  carrito.addEventListener("click", eliminarElemento);
+  vaciarCarritoBtn.addEventListener("click", vaciarCarrito);
+}
+
+function comprarElemento(e){
+  e.preventDefault();
+  if(e.target.classList.contains("agregar-carrito")){
+    const elemento = e.target.parentElement.parentElement;
+    leerDatosElemento(elemento);
   }
-function cerrar(){
-    mostrador.style.width = "100%";
-    seleccion.style.width = "0%";
-    seleccion.style.opacity = "0";
-    quitarBordes();
 }
-function quitarBordes(){
-    var items = document.getElementsByClassName("item");
-    for(i=0;i <items.length; i++){
-        items[i].style.border = "none";
-    }
+
+function leerDatosElemento(elemento){
+  const infoElemento={
+    imagen: elemento.querySelector("img").src,
+    titulo: elemento.querySelector("h3").textContent,
+    precio: elemento.querySelector(".precio").textContent,
+    id: elemento.querySelector("a").getAttribute("data-id")
+  }
+  insertarCarrito(infoElemento);
+
 }
+
+function insertarCarrito(elemento){
+  const row= document.createElement("tr");
+  row.innerHTML = `
+  <td>
+    <img src="${elemento.imagen}" width="100">
+  </td>
+  <td>
+    ${elemento.titulo}
+  </td>
+  <td>
+    ${elemento.precio}
+  </td>
+  <td>
+    <a href="#" class="borrar" data-i="${elemento.id}">X</a>
+  </td>
+`;
+
+  lista.appendChild(row);
+
+}
+
+function eliminarElemento(e){
+  e.preventDefault();
+  let elemento,
+      elementoId;
+  if(e.target.classList.contains("borrar")){
+    e.target.parentElement.parentElement.remove();
+    elemento = e.target.parentElement.parentElement;
+    elementoId = elemento.querySelector("a").getAttribute("data-id");
+  }
+}
+
+function vaciarCarrito(){
+  while(lista.firstChild){
+    lista.removeChild(lista.firstChild);
+  }
+  return false;
+}
+
+

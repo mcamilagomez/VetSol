@@ -7,7 +7,7 @@
 }
 
 :root{ 
-    --body-color: #327649;
+    --body-color: #339552;
     --nav-color: #c1cec200;
     --side-nav: #2d841500;
     --text-color: #FFF;
@@ -136,19 +136,26 @@ nav .nav-bar .logo a{
     transition: all 0.3s ease;
 } 
 
-.dark-light i.sun{
+/* Inicialmente el sol es visible y la luna oculta */
+.dark-light i.sun {
     opacity: 0;
-    pointer-events: none;
-}
-
-.dark-light.activate i.sun{
-    opacity: 1;
     pointer-events: auto;
 }
 
-.dark-light.activate i.moon{
-    opacity: 0;
+.dark-light i.moon {
+    opacity: 1;
     pointer-events: none;
+}
+
+/* Cuando .dark-light está activa, invertimos la visibilidad */
+.dark-light.active i.sun {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.dark-light.active i.moon {
+    opacity: 0;
+    pointer-events: auto;
 }
 
 @media (max-width: 790px) {
@@ -256,4 +263,196 @@ nav .nav-bar .logo a{
 
 .hero__paragraph {
     margin-bottom: 20px;
+}
+
+/* Knowledge */
+
+.knowledge {
+    background-position: 0 0, 10px 10px;
+    overflow: hidden;
+}
+
+.knowledge__container {
+    padding: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.grid-container h4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: #19723ee8;
+    color: #d4d3d3;
+    border-radius: 3px;
+    font-size: 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+
+.grid-container h4::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%; /* Ajusta la posición vertical del tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fffffff7;
+    color: #306b2de8;
+    padding: 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.grid-container h4:hover::after {
+    opacity: 1;
+}
+.knowledge .subtitle{
+    color: #ffffff;
+    font-size: 40px; /* Reducir tamaño si es necesario */
+    text-transform: uppercase;
+    margin-bottom: 10px; /* Reducir margen si es necesario */
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width:800px){
+    .hero__title{
+        font-size: 2.5rem;
+    }
+
+
+    .about__main{
+        gap: 2em;
+    }
+
+    .about__icons:last-of-type{
+        grid-column: 1/-1;
+    }
+
+    .person_container{
+        grid-template-columns: 30px 1fr 30px;
+    }
+
+    .person_body{
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content max-content;
+        gap: 3em;
+        justify-items:center ;
+    }
+
+    .person_img{
+        width: 200px;
+        height: 200px;
+        
+    }
+
+    .questions__copy{
+        width: 100%;
+    }
+
+    .footer__container{
+        flex-wrap: wrap;
+    }
+
+    .nav--footer{
+        width: 100%;
+        justify-items: center;
+    }
+
+    .nav__link--footer{
+        width: 100%;
+        justify-content: space-evenly;
+        margin: 0;
+    }
+
+    .footer__form{
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .footer__input{
+        flex: 1;
+    }
+
+}
+
+
+@media (max-width:600px){
+    .hero__title{
+        font-size: 2rem;
+    }
+
+    .hero__paragraph{
+        font-size: 1rem;
+    }
+
+    .subtitle{
+        font-size: 1.8rem;
+    }
+
+    .person{
+        --padding-container: 60px 0;
+    }
+
+    .person_container{
+        grid-template-columns: 28px 1fr 28px;
+        gap: .9em;
+    }
+
+    .person_arrow{
+        width: 100%;
+    }
+
+    .person_course{
+        margin-top: 15px;
+    }
+
+    .questions__title{
+        font-size: 1rem;
+    }
+
+    .footer__title{
+        justify-self: start;
+        margin-bottom: 15px;
+    }
+
+    .nav--footer{
+        padding-bottom: 60px;
+    }
+
+    .nav__link--footer{
+        justify-content: space-between;
+    }
+
+    .footer__inputs{
+        flex-wrap: wrap;
+    }
+
+    .footer__input{
+        flex-basis: 100%;
+        margin: 0;
+        margin-bottom: 16px;
+    }
+
+    .footer__submit{
+        margin-right: auto;
+        margin-left: 0;
+        
+
+        /* 
+        margin:0;
+        width: 100%;
+        */
+    }
 }

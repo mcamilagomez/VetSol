@@ -1,25 +1,25 @@
 const body= document.querySelector("body"),
       nav= document.querySelector("nav"),
       modeToggle= document.querySelector(".dark-light"),
-      sidebarOpen= document.querySelector(".sidebarOpen"),
+      sidebarOpen= document.querySelector(".sidebarOpen"),      
+      sunIcon = document.querySelector(".sun"),
+      moonIcon = document.querySelector(".moon"),
       siderbarClose= document.querySelector(".siderbarClose");
 
       let getMode = localStorage.getItem("mode");
         if(getMode && getMode === "dark-mode"){
             body.classList.add("dark");
+            modeToggle.classList.add("active");
         }
 
 // esto es para cambiar el modo de claro <-> oscuro
 modeToggle.addEventListener("click", () => {
     modeToggle.classList.toggle("active");
     body.classList.toggle("dark");
-    const personSection = document.querySelector(".person");
-    personSection.classList.toggle("dark-mode");
-    console.log("Clase dark-mode en person:", personSection.classList.contains("dark-mode"));
 
-    if(!body.classList.contains("dark")){
+    if (!body.classList.contains("dark")) {
         localStorage.setItem("mode", "light-mode");
-    }else{
+    } else {
         localStorage.setItem("mode", "dark-mode");
     }
 });
@@ -36,4 +36,18 @@ body.addEventListener("click", e =>{
     }
 });
 
+//ocultar barra de navegación
+let lastScrollTop = 0;
+
+window.addEventListener("scroll", function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop > lastScrollTop) {
+        // Desplazando hacia abajo
+        navbar.classList.add("nav-hidden");
+    } else {
+        // Desplazando hacia arriba
+        navbar.classList.remove("nav-hidden");
+    }
+    lastScrollTop = scrollTop;
+});
 

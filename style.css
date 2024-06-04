@@ -9,7 +9,7 @@
 :root{ 
     --body-color: #327649;
     --nav-color: #2cbb3f00;
-    --side-nav: #2d841500;
+    --side-nav: #2d8415e1;
     --text-color: #FFF;
     --search-bar: #F2F2F2;
     --search-text: #010718;
@@ -24,12 +24,11 @@ body{
 
 body.dark{
     --body-color: #1f387b;
-    --nav-color: #16244a;
+    --nav-color: #16244a00;
     --side-nav: #144f76ef;
     --text-color: #ccc;
     --search-text: #2184c5e2;
 }
-
 
 /* navigation bar*/
 nav{
@@ -40,6 +39,12 @@ nav{
     width: 100%;
     background-color: var(--nav-color);
     z-index: 100;
+}
+
+
+nav.hide {
+    top: -70px;
+    transition: top 0.3s;
 }
 
 nav .nav-bar{
@@ -136,19 +141,26 @@ nav .nav-bar .logo a{
     transition: all 0.3s ease;
 } 
 
-.dark-light i.sun{
+/* Inicialmente el sol es visible y la luna oculta */
+.dark-light i.sun {
     opacity: 0;
-    pointer-events: none;
-}
-
-.dark-light.activate i.sun{
-    opacity: 1;
     pointer-events: auto;
 }
 
-.dark-light.activate i.moon{
-    opacity: 0;
+.dark-light i.moon {
+    opacity: 1;
     pointer-events: none;
+}
+
+/* Cuando .dark-light está activa, invertimos la visibilidad */
+.dark-light.active i.sun {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.dark-light.active i.moon {
+    opacity: 0;
+    pointer-events: auto;
 }
 
 @media (max-width: 790px) {
@@ -228,7 +240,7 @@ nav .nav-bar .logo a{
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%), url("imagenes/fondo.jpg");
+    background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%), url("imagenes/fondo.webp");
     background-size: cover;
     clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 77%);
     z-index: -1;
@@ -306,17 +318,34 @@ nav .nav-bar .logo a{
 
 .person{
     background-color: #327649;
-    background-image: radial-gradient(#1a9026 0.8px, transparent 0.5px), radial-gradient(#1a9026 0.8px, #f2f2f2 0.5px);
+    background-image: radial-gradient(#1a9026 0.8px, transparent 0.5px), radial-gradient(#1a9026 0.8px, #dad9d9 0.5px);
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
     overflow: hidden;
 }
 
 
-.body.dark .person {
-    /* Estilos para el modo oscuro */
-    background-color: #333; /* Ejemplo de cambio de color de fondo */
-    color: #327649; /* Ejemplo de cambio de color de texto */
+/* Estilos para el modo oscuro de person*/
+body.dark .person {
+    background-color: #1e445e; /* Fondo de la sección en modo oscuro */
+    background-image: radial-gradient(#d6d6d6 0.8px, transparent 0.5px), radial-gradient(#b8b8b8 0.8px, #1e445e 0.5px);
+    color: #ccc; /* Color de texto en modo oscuro */
+}
+
+body.dark .person .person_texts {
+    color: #ccc; /* Color de texto de los textos de persona en modo oscuro */
+}
+
+body.dark .person .person_course {
+    color: #ccc; /* Color del curso en modo oscuro */
+}
+
+body.dark .person .person_review {
+    color: #ccc; /* Color del review en modo oscuro */
+}
+
+body.dark .person .subtitle {
+    color: #dedede; /* Color del subtítulo en modo oscuro */
 }
 
 .person_container{
@@ -382,6 +411,10 @@ nav .nav-bar .logo a{
 
 .questions{
     text-align: center;
+}
+
+body.dark .questions .questions__img{
+    background-color: #1f387b;
 }
 
 .questions__paragraph{
@@ -459,6 +492,10 @@ nav .nav-bar .logo a{
 
 .footer{
     background-color: #3b8221;
+}
+
+body.dark .footer{
+    background-color: #1e445e;
 }
 
 .footer__title{
