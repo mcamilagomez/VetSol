@@ -9,7 +9,7 @@
 :root{ 
     --body-color: #327649;
     --nav-color: #2cbb3f00;
-    --side-nav: #2d8415e1;
+    --side-nav: #2d8415;
     --text-color: #FFF;
     --search-bar: #F2F2F2;
     --search-text: #010718;
@@ -30,7 +30,7 @@ body.dark{
     --search-text: #2184c5e2;
 }
 
-/* navigation bar*/
+/* navigationbar*/
 nav{
     position: fixed;
     top: 0;
